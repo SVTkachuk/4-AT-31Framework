@@ -14,6 +14,7 @@ public class ReversoLogInTC {
     @BeforeTest
     void init(){
         driver = BrowserFactory.getDriver("Chrome");
+        driver.manage().window().maximize();
     }
 
     @Test
