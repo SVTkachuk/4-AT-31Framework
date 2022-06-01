@@ -1,5 +1,6 @@
 package BrowserFactory;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import io.github.bonigarcia.wdm.managers.ChromeDriverManager;
 import io.github.bonigarcia.wdm.managers.EdgeDriverManager;
 import org.openqa.selenium.WebDriver;
@@ -19,7 +20,8 @@ public class BrowserFactory {
                     INSTANCE.set(new ChromeDriver());
                     break;
                 case "Edge":
-                    System.setProperty("webdriver.edge.driver","drivers/msedgedriver.exe");
+//                    System.setProperty("webdriver.edge.driver","drivers/msedgedriver.exe");
+                    WebDriverManager.edgedriver().setup();
                     INSTANCE.set(new EdgeDriver());
                     break;
                 default:
