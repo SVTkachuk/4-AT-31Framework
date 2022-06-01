@@ -1,3 +1,8 @@
 # Default ignored files
 /shelf/
 /workspace.xml
+/drivers/
+/.idea/
+/allure-result/
+/target/
+
