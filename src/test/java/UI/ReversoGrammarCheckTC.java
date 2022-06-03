@@ -9,16 +9,15 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class ReversoTranslationTC {
+public class ReversoGrammarCheckTC {
     private WebDriver driver;
 
     @DataProvider
-    Object[][] translationWords() {
-        //There must be Ukrainian to translate or be translated
+    Object[][] grammarSentence() {
         return new Object[][]{
-                {"English", "Ukrainian","ball","м'яч"},
-                {"Ukrainian", "Polish","привіт","cześć"},
-                {"Ukrainian","French","собака","chien"}
+                {"I is student", "I am a student"},
+                {"I likes these course", "I like this course"},
+                {"It are funny to do","It is fun to do"}
         };
     }
 
@@ -28,21 +27,20 @@ public class ReversoTranslationTC {
         driver.manage().window().maximize();
     }
 
-    @Test(dataProvider = "translationWords")
-    void TranslationTest(String firstLanguage,String secondLanguage,String word,String translatedWord){
+    @Test(dataProvider = "grammarSentence")
+    void grammarCheck(String sentence, String expectedSentence){
         ReversoBO reversoBO = new ReversoBO(driver);
 
         reversoBO.homePage();
 
-        reversoBO.goTranslationPage();
+        reversoBO.goGrammarCheckPage();
 
-        reversoBO.selectFirstLanguage(firstLanguage);
+        reversoBO.wrightSentence(sentence);
 
-        reversoBO.selectSecondLanguage(secondLanguage);
+        reversoBO.checkSentence();
 
-        reversoBO.inputWord(word);
+        Assert.assertEquals(reversoBO.getCorrectSentence(),expectedSentence);
 
-        Assert.assertTrue(reversoBO.getTranslatedWord(translatedWord));
 
     }
 

@@ -21,30 +21,36 @@ public class HomePO {
     private WebElement profile;
     @FindBy(xpath = "//a[contains(@class, \"translation-link product\")]")
     private WebButton translationLink;
+    @FindBy(xpath = "//a[contains(@class, \"speller-link product\")]")
+    private WebButton checkGrammarLink;
 
     private WebDriver driver;
 
-    public HomePO(WebDriver driver){
-        this.driver=driver;
-        PageFactory.initElements(new CustomFieldDecorator(this.driver),this);
+    public HomePO(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(new CustomFieldDecorator(this.driver), this);
     }
 
-    public void homePage(){
+    public void homePage() {
         driver.get("https://context.reverso.net/translation/");
     }
 
-    public void clickLogin(){
+    public void clickLogin() {
         loginButtonFirst.buttonClick();
         getLoginButtonSecond.buttonClick();
     }
 
-    public Boolean checkLogged(){
+    public Boolean checkLogged() {
         profileButton.buttonClick();
         return profile.isDisplayed();
     }
 
-    public void goTranslationPage(){
+    public void goTranslationPage() {
         translationLink.buttonClick();
+    }
+
+    public void goCheckGrammarPage() {
+        checkGrammarLink.buttonClick();
     }
 
 }

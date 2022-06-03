@@ -17,7 +17,6 @@ public class ReversoLogInTC {
         return new Object[][]{
                 {"testikVisim@gmail.com", "dfwew33"},
                 {"testikVisim@gmail.com", "d232Fasd"},
-                {"mrWf", "fdger"}
         };
     }
 
@@ -43,8 +42,7 @@ public class ReversoLogInTC {
 
     @AfterTest
     void close() {
-         driver.quit();
         driver.close();
-
+        driver.quit();
     }
 }

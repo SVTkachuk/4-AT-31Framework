@@ -1,8 +1,6 @@
 package PO;
 
 import Decorators.CustomFieldDecorator;
-import Decorators.WebButton;
-import Decorators.WebInput;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -54,11 +52,11 @@ public class TranslationPO {
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("/html/body/app-root/app-translation/div/app-translation-box/div[1]/div[1]/div[2]/div[2]/div[1]/textarea")));
         textArea = driver.findElements(By.xpath("//textarea"));
         try {
-            wait.until(ExpectedConditions.attributeToBe(textArea.get(1),"value",word));
+            wait.until(ExpectedConditions.attributeToBeNotEmpty(textArea.get(1),"value"));
         }
         catch (TimeoutException e){
-            return false;
+            System.out.println("Time Out");
         }
-        return true;
+         return textArea.get(1).getAttribute("value").equals(word);
     }
 }

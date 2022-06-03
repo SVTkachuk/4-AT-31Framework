@@ -26,11 +26,17 @@ public class SignUpPO {
         PageFactory.initElements(new CustomFieldDecorator(this.driver), this);
     }
 
-    public void signUp(String login, String password) {
+    public void insertLogin(String login) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
         wait.until(ExpectedConditions.visibilityOf(loginInput));
         loginInput.sendKeys(login);
+    }
+
+    public void insertPassword(String password){
         passwordInput.sendKeys(password);
+    }
+
+    public void clickSubmit(){
         submitButton.click();
     }
 

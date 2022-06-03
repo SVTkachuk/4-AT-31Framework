@@ -1,5 +1,6 @@
 package ReversoBO;
 
+import PO.CheckGrammarPO;
 import PO.HomePO;
 import PO.SignUpPO;
 import PO.TranslationPO;
@@ -12,6 +13,7 @@ public class ReversoBO {
     private HomePO homePO;
     private SignUpPO signUpPO;
     private TranslationPO translationPO;
+    private CheckGrammarPO checkGrammarPO;
 
 
     public ReversoBO(WebDriver driver) {
@@ -19,6 +21,7 @@ public class ReversoBO {
         this.homePO = new HomePO(this.driver);
         this.signUpPO = new SignUpPO(this.driver);
         this.translationPO = new TranslationPO(this.driver);
+        this.checkGrammarPO = new CheckGrammarPO(this.driver);
     }
 
 
@@ -31,7 +34,9 @@ public class ReversoBO {
     }
 
     public void signUp(String login, String password) {
-        signUpPO.signUp(login, password);
+        signUpPO.insertLogin(login);
+        signUpPO.insertPassword(password);
+        signUpPO.clickSubmit();
     }
 
     public Boolean checkLogged() {
@@ -58,6 +63,22 @@ public class ReversoBO {
 
     public Boolean getTranslatedWord(String word){
         return translationPO.getTranslatedWord(word);
+    }
+
+    public void goGrammarCheckPage(){
+        homePO.goCheckGrammarPage();
+    }
+
+    public void wrightSentence(String sentence){
+        checkGrammarPO.insertSentence(sentence);
+    }
+
+    public void checkSentence(){
+        checkGrammarPO.pressCheckButton();
+    }
+
+    public String getCorrectSentence(){
+       return checkGrammarPO.getCorrectedPhrase();
     }
 
 }
