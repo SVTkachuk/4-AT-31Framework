@@ -19,6 +19,8 @@ public class HomePO {
     private WebButton profileButton;
     @FindBy(xpath = "//span[contains(@class, \"text username\")]")
     private WebElement profile;
+    @FindBy(xpath = "//a[contains(@class, \"translation-link product\")]")
+    private WebButton translationLink;
 
     private WebDriver driver;
 
@@ -39,6 +41,10 @@ public class HomePO {
     public Boolean checkLogged(){
         profileButton.buttonClick();
         return profile.isDisplayed();
+    }
+
+    public void goTranslationPage(){
+        translationLink.buttonClick();
     }
 
 }

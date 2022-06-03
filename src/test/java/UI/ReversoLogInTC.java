@@ -6,34 +6,45 @@ import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class ReversoLogInTC {
     private WebDriver driver;
 
+    @DataProvider
+    Object[][] loginProvider() {
+        return new Object[][]{
+                {"testikVisim@gmail.com", "dfwew33"},
+                {"testikVisim@gmail.com", "d232Fasd"},
+                {"mrWf", "fdger"}
+        };
+    }
+
     @BeforeTest
-    void init(){
+    void init() {
         driver = BrowserFactory.getDriver("Chrome");
         driver.manage().window().maximize();
     }
 
-    @Test
-    void loginTest(){
+    @Test(dataProvider = "loginProvider")
+    void loginTest(String login, String password) {
         ReversoBO reversoBO = new ReversoBO(driver);
 
         reversoBO.homePage();
 
         reversoBO.clickLogin();
 
-        reversoBO.signUp("testikVisim@gmail.com","d232Fasd");
+        reversoBO.signUp(login, password);
 
         Assert.assertTrue(reversoBO.checkLogged());
 
     }
 
     @AfterTest
-    void close(){
+    void close() {
+         driver.quit();
         driver.close();
-        driver.quit();
+
     }
 }
