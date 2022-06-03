@@ -1,9 +1,6 @@
 package ReversoBO;
 
-import PO.CheckGrammarPO;
-import PO.HomePO;
-import PO.SignUpPO;
-import PO.TranslationPO;
+import PO.*;
 import org.openqa.selenium.WebDriver;
 
 public class ReversoBO {
@@ -14,6 +11,7 @@ public class ReversoBO {
     private SignUpPO signUpPO;
     private TranslationPO translationPO;
     private CheckGrammarPO checkGrammarPO;
+    private SynonymsCheckPO synonymsCheckPO;
 
 
     public ReversoBO(WebDriver driver) {
@@ -22,6 +20,7 @@ public class ReversoBO {
         this.signUpPO = new SignUpPO(this.driver);
         this.translationPO = new TranslationPO(this.driver);
         this.checkGrammarPO = new CheckGrammarPO(this.driver);
+        this.synonymsCheckPO = new SynonymsCheckPO(this.driver);
     }
 
 
@@ -80,5 +79,23 @@ public class ReversoBO {
     public String getCorrectSentence(){
        return checkGrammarPO.getCorrectedPhrase();
     }
+
+    public void goSynonymsCheckPage(){
+        homePO.goSynonymsCheckPage();
+    }
+
+    public void writeWordToCheckSynonym(String word){
+        synonymsCheckPO.textAreaIsPresent();
+        synonymsCheckPO.insertWord(word);
+    }
+
+    public void searchSynonyms(){
+        synonymsCheckPO.searchSynonyms();
+    }
+
+    public Boolean getSynonyms(String expectedSynonym){
+        return synonymsCheckPO.getSynonyms(expectedSynonym);
+    }
+
 
 }

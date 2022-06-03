@@ -23,6 +23,8 @@ public class HomePO {
     private WebButton translationLink;
     @FindBy(xpath = "//a[contains(@class, \"speller-link product\")]")
     private WebButton checkGrammarLink;
+    @FindBy(xpath = "//a[contains(@class, \"synonyms-link product\")]")
+    private WebButton synonymsCheckLink;
 
     private WebDriver driver;
 
@@ -53,4 +55,8 @@ public class HomePO {
         checkGrammarLink.buttonClick();
     }
 
+
+    public void goSynonymsCheckPage() {
+        synonymsCheckLink.buttonClick();
+    }
 }
