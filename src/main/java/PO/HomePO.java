@@ -3,10 +3,18 @@ package PO;
 import Decorators.CustomFieldDecorator;
 import Decorators.WebButton;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import javax.swing.tree.ExpandVetoException;
+import java.sql.Time;
+import java.time.Duration;
+import java.util.List;
 
 
 public class HomePO {
@@ -25,6 +33,14 @@ public class HomePO {
     private WebButton checkGrammarLink;
     @FindBy(xpath = "//a[contains(@class, \"synonyms-link product\")]")
     private WebButton synonymsCheckLink;
+    @FindBy(xpath = "//*[@id=\"entry\"]")
+    private WebElement wordSearchInput;
+    @FindBy(xpath = "//*[@id=\"search-button\"]")
+    private WebButton searchButtonSubmit;
+    @FindBy(xpath = "//a[contains(@title,\"History\")]")
+    private WebButton historyLink;
+    @FindBy(xpath = "//button[contains(@class, \"close\")]")
+    private WebElement buttonClose;
 
     private WebDriver driver;
 
@@ -59,4 +75,39 @@ public class HomePO {
     public void goSynonymsCheckPage() {
         synonymsCheckLink.buttonClick();
     }
+
+    public void checkVisibilityOfWordInput(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        try{
+            wait.until(ExpectedConditions.visibilityOf(wordSearchInput));
+        }
+        catch (TimeoutException e){
+            System.out.println("Time out");
+        }
+    }
+
+    public void closeModalWindow(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        try{
+            wait.until(ExpectedConditions.visibilityOf(buttonClose));
+            buttonClose.click();
+        }
+        catch (TimeoutException e){
+        }
+
+    }
+
+    public void searchWord(String word){
+        wordSearchInput.sendKeys(word);
+    }
+
+    public void submitWordSearch(){
+        searchButtonSubmit.buttonClick();
+    }
+
+    public void goHistoryPage(){
+        historyLink.buttonClick();
+    }
+
+
 }

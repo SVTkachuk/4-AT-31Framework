@@ -12,6 +12,7 @@ public class ReversoBO {
     private TranslationPO translationPO;
     private CheckGrammarPO checkGrammarPO;
     private SynonymsCheckPO synonymsCheckPO;
+    private HistoryPO historyPO;
 
 
     public ReversoBO(WebDriver driver) {
@@ -21,6 +22,7 @@ public class ReversoBO {
         this.translationPO = new TranslationPO(this.driver);
         this.checkGrammarPO = new CheckGrammarPO(this.driver);
         this.synonymsCheckPO = new SynonymsCheckPO(this.driver);
+        this.historyPO = new HistoryPO(this.driver);
     }
 
 
@@ -42,60 +44,77 @@ public class ReversoBO {
         return homePO.checkLogged();
     }
 
-    public void goTranslationPage(){
+    public void goTranslationPage() {
         homePO.goTranslationPage();
     }
 
-    public void selectFirstLanguage(String language){
+    public void selectFirstLanguage(String language) {
         translationPO.clickFirstDropdown();
         translationPO.selectFirstLanguage(language);
     }
 
-    public void selectSecondLanguage(String language){
+    public void selectSecondLanguage(String language) {
         translationPO.clickSecondDropdown();
         translationPO.selectSecondLanguage(language);
     }
 
-    public void inputWord(String word){
+    public void inputWord(String word) {
         translationPO.inputWord(word);
     }
 
-    public Boolean getTranslatedWord(String word){
+    public Boolean getTranslatedWord(String word) {
         return translationPO.getTranslatedWord(word);
     }
 
-    public void goGrammarCheckPage(){
+    public void goGrammarCheckPage() {
         homePO.goCheckGrammarPage();
     }
 
-    public void wrightSentence(String sentence){
+    public void wrightSentence(String sentence) {
         checkGrammarPO.insertSentence(sentence);
     }
 
-    public void checkSentence(){
+    public void checkSentence() {
         checkGrammarPO.pressCheckButton();
     }
 
-    public String getCorrectSentence(){
-       return checkGrammarPO.getCorrectedPhrase();
+    public String getCorrectSentence() {
+        return checkGrammarPO.getCorrectedPhrase();
     }
 
-    public void goSynonymsCheckPage(){
+    public void goSynonymsCheckPage() {
         homePO.goSynonymsCheckPage();
     }
 
-    public void writeWordToCheckSynonym(String word){
+    public void writeWordToCheckSynonym(String word) {
         synonymsCheckPO.textAreaIsPresent();
         synonymsCheckPO.insertWord(word);
     }
 
-    public void searchSynonyms(){
+    public void searchSynonyms() {
         synonymsCheckPO.searchSynonyms();
     }
 
-    public Boolean getSynonyms(String expectedSynonym){
+    public Boolean getSynonyms(String expectedSynonym) {
         return synonymsCheckPO.getSynonyms(expectedSynonym);
     }
 
+    public void closeModalWindow() {
+        homePO.closeModalWindow();
+    }
+
+    public void searchWord(String word) {
+        homePO.checkVisibilityOfWordInput();
+        homePO.searchWord(word);
+        homePO.submitWordSearch();
+    }
+
+    public void goHistoryPage() {
+        homePO.goHistoryPage();
+    }
+
+    public Boolean getSearchedWord(String searchedWord) {
+        return historyPO.getSearchedWord(searchedWord);
+    }
 
 }
