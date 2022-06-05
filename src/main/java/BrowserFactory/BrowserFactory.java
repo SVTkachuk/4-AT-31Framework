@@ -19,7 +19,6 @@ public class BrowserFactory {
                     INSTANCE.set(new ChromeDriver());
                     break;
                 case "Edge":
-//                    System.setProperty("webdriver.edge.driver","drivers/msedgedriver.exe");
                     WebDriverManager.edgedriver().setup();
                     INSTANCE.set(new EdgeDriver());
                     break;
@@ -30,4 +29,7 @@ public class BrowserFactory {
         }
         return INSTANCE.get();
     }
+
+
+
 }

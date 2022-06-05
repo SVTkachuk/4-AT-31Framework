@@ -4,10 +4,7 @@ import BrowserFactory.BrowserFactory;
 import ReversoBO.ReversoBO;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 public class ReversoCheckHistoryTC {
     private WebDriver driver;
@@ -23,6 +20,7 @@ public class ReversoCheckHistoryTC {
                 {"hard"}
         };
     }
+
 
     @BeforeTest
     void init() {
@@ -40,15 +38,17 @@ public class ReversoCheckHistoryTC {
 
         reversoBO.signUp(login, password);
 
+        reversoBO.homePage();
+
+        reversoBO.closeModalWindow();
+
     }
+
 
 
     @Test(dataProvider = "words")
     void checkHistory(String word){
-
         reversoBO.homePage();
-
-        reversoBO.closeModalWindow();
 
         reversoBO.searchWord(word);
 

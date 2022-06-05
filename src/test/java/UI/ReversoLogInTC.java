@@ -1,13 +1,15 @@
 package UI;
 
+import Allure.AllureTestListener;
 import ReversoBO.ReversoBO;
 import BrowserFactory.BrowserFactory;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
+
+@Listeners({
+        AllureTestListener.class
+})
 
 public class ReversoLogInTC {
     private WebDriver driver;

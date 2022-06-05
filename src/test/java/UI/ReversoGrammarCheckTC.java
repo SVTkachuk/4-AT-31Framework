@@ -1,13 +1,15 @@
 package UI;
 
+import Allure.AllureTestListener;
 import BrowserFactory.BrowserFactory;
 import ReversoBO.ReversoBO;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
+
+@Listeners({
+        AllureTestListener.class
+})
 
 public class ReversoGrammarCheckTC {
     private WebDriver driver;

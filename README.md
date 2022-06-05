@@ -4,3 +4,6 @@ testikVisim@gmail.com
 
 d232Fasd
 
+allure serve -h localhost
+
+mvn clean test
